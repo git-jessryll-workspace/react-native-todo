@@ -21,9 +21,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  todoText: {
-    fontSize: 16,
-  },
 });
 
 const TodoItem: React.FC<Props> = ({
@@ -32,7 +29,7 @@ const TodoItem: React.FC<Props> = ({
   status,
   removeTodo,
   updateTodoStatus,
-}) => {
+}): JSX.Element => {
   return (
     <View style={styles.todoItem}>
       <View
@@ -48,7 +45,7 @@ const TodoItem: React.FC<Props> = ({
             width: '10%',
             display: 'flex',
             alignItems: 'center',
-            paddingRight: 5
+            paddingRight: 5,
           }}>
           {status === 'active' && (
             <CheckCircleIcon
@@ -70,7 +67,14 @@ const TodoItem: React.FC<Props> = ({
             updateTodoStatus(id, status === 'done' ? 'active' : 'done')
           }>
           <View style={{width: '90%'}}>
-            <Text style={styles.todoText}>{name}</Text>
+            <Text
+              style={{
+                fontSize: 16,
+                textDecorationLine: status === 'done' ? 'line-through' : 'none',
+                textDecorationStyle: 'solid',
+              }}>
+              {name}
+            </Text>
           </View>
         </TouchableWithoutFeedback>
       </View>

@@ -31,7 +31,7 @@ const TodoProvider: FC<{children: ReactNode}> = ({children}) => {
   const [textTodo, setTextTodo] = useState('');
   const [filterBy, setFilterBy] = useState('all');
 
-  const {filteredItems} = useTodoFilter({filterBy, todos});
+  const {filteredItems} = useTodoFilter({filterBy, todos, textTodo});
 
   const addTodo = () => {
     setTodos((todos: TodoItemType[]) => {

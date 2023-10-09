@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     borderWidth: 1,
     borderColor: '#000',
-    borderRadius: 10,
+    borderRadius: 5,
   },
   plusIconWrapper: {
     position: 'absolute',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const TodoForm = () => {
+const TodoForm = (): JSX.Element => {
   const {textTodo, setTextTodo, addTodo} = useTodo() as TodoContextProps;
   return (
     <View style={styles.formPanel}>

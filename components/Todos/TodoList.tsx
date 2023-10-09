@@ -19,7 +19,7 @@ type Props = {
   }[];
 };
 
-const TodoListComponent: React.FC<Props> = ({todos}) => {
+const TodoListComponent: React.FC<Props> = ({todos}):JSX.Element => {
   const {removeTodo, updateTodoStatus} = useTodo() as TodoContextProps;
   return (
     <FlatList
