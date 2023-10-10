@@ -7,9 +7,11 @@ import {Keyboard, View} from 'react-native';
 import {useTodoFilter} from '../hooks/useTodoFilter';
 
 const TodoPage = (): JSX.Element => {
-  const {filterBy, addTodo, todos} = useTodo() as TodoContextProps;
   const [textTodo, setTextTodo] = useState<string>('');
-  const {filteredItems: filteredTodoItems} = useTodoFilter({
+
+  const {filterBy, addTodo, todos} = useTodo() as TodoContextProps;
+
+  const {filteredItems} = useTodoFilter({
     todos,
     filterBy,
     textTodo,
@@ -36,10 +38,10 @@ const TodoPage = (): JSX.Element => {
         addTodoItem={addTodoItem}
       />
       <FilterTodo filterBy={filterBy} />
-      {filteredTodoItems.length === 0 ? (
+      {filteredItems.length === 0 ? (
         <TodoEmptyState />
       ) : (
-        <TodoList todos={filteredTodoItems as TodoItemType[]} />
+        <TodoList todos={filteredItems as TodoItemType[]} />
       )}
     </View>
   );
