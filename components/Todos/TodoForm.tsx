@@ -5,6 +5,7 @@ import {TodoFormStyle} from '../../styles';
 
 const TodoForm = (): JSX.Element => {
   const {textTodo, setTextTodo, addTodo} = useTodo() as TodoContextProps;
+  
   return (
     <View style={TodoFormStyle.formPanel}>
       <Text style={TodoFormStyle.mainTitle}>My Todos</Text>

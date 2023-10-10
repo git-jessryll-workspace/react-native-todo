@@ -1,7 +1,6 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import TodoItem from './TodoItem';
-import {TodoContextProps, useTodo} from '../../context/TodoProvider';
 import {TodoListStyle} from '../../styles';
 
 type Props = {
@@ -12,24 +11,14 @@ type Props = {
   }[];
 };
 
-const TodoListComponent: React.FC<Props> = ({todos}): JSX.Element => {
-  const {removeTodo, updateTodoStatus} = useTodo() as TodoContextProps;
+const TodoList: React.FC<Props> = ({todos}): JSX.Element => {
   return (
     <FlatList
       style={TodoListStyle.containerTodoList}
       data={todos}
-      renderItem={({item}) => (
-        <TodoItem
-          name={item.name}
-          id={item.id}
-          status={item.status}
-          removeTodo={removeTodo}
-          updateTodoStatus={updateTodoStatus}
-        />
-      )}
+      renderItem={({item}) => <TodoItem item={item} />}
       keyExtractor={(item: any) => item.id}
     />
   );
 };
-const TodoList = React.memo(TodoListComponent);
-export default TodoList;
+export default React.memo(TodoList);

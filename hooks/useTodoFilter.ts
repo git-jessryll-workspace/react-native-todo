@@ -1,3 +1,4 @@
+import {useCallback} from 'react';
 import {TodoItemType} from '../types/todo';
 
 type Props = {
@@ -7,18 +8,22 @@ type Props = {
 };
 
 export const useTodoFilter = ({filterBy, todos, textTodo}: Props) => {
-  const filteredItems = todos
-    .filter((todo: TodoItemType) =>
-      todo.name.toLowerCase().includes(textTodo.toLowerCase()),
-    )
-    .filter((todo: TodoItemType) => {
-      if (filterBy === 'all') {
-        return true;
-      }
-      return todo.status.toLowerCase() === filterBy.toLowerCase();
-    });
+  const filteredItems = useCallback(
+    () =>
+      todos
+        .filter((todo: TodoItemType) =>
+          todo.name.toLowerCase().includes(textTodo.toLowerCase()),
+        )
+        .filter((todo: TodoItemType) => {
+          if (filterBy === 'all') {
+            return true;
+          }
+          return todo.status.toLowerCase() === filterBy.toLowerCase();
+        }),
+    [textTodo, filterBy, todos],
+  );
 
   return {
-    filteredItems: filteredItems,
+    filteredItems: filteredItems(),
   };
 };

@@ -3,22 +3,19 @@ import {View, Text, TouchableWithoutFeedback} from 'react-native';
 import {CheckCircleIcon, TrashIcon} from 'react-native-heroicons/outline';
 import {CheckCircleIcon as SolidCheckCircleIcon} from 'react-native-heroicons/solid';
 import {TodoItemStyle} from '../../styles';
+import {TodoContextProps, useTodo} from '../../context/TodoProvider';
 
 type Props = {
-  id: number;
-  name: string;
-  status: string;
-  removeTodo: (id: number) => void;
-  updateTodoStatus: (id: number, status: string) => void;
+  item: {
+    id: number;
+    name: string;
+    status: string;
+  };
 };
 
-const TodoItem: React.FC<Props> = ({
-  name,
-  id,
-  status,
-  removeTodo,
-  updateTodoStatus,
-}): JSX.Element => {
+const TodoItem: React.FC<Props> = ({item}): JSX.Element => {
+  const {status, id, name} = item;
+  const {removeTodo, updateTodoStatus} = useTodo() as TodoContextProps;
   return (
     <View style={TodoItemStyle.todoItem}>
       <View style={TodoItemStyle.todoTextWrapper}>
@@ -62,4 +59,4 @@ const TodoItem: React.FC<Props> = ({
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);

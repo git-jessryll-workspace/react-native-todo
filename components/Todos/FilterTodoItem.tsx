@@ -3,10 +3,11 @@ import {Text, TouchableHighlight, View} from 'react-native';
 import {TodoContextProps, useTodo} from '../../context/TodoProvider';
 import {TodoFilterItemStyle} from '../../styles';
 
-const FilterTodoItem: FC<{filter: {code: string; name: string}}> = ({
-  filter,
-}) => {
-  const {setFilterBy, filterBy} = useTodo() as TodoContextProps;
+const FilterTodoItem: FC<{
+  filter: {code: string; name: string};
+  filterBy: string;
+}> = ({filter, filterBy}) => {
+  const {setFilterBy} = useTodo() as TodoContextProps;
   const {
     buttonWrapper: filterButtonWrapperStyle,
     activeBg: filterActiveBgStyle,
