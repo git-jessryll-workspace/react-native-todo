@@ -1,16 +1,17 @@
 import {Text, TextInput, View} from 'react-native';
 import {PlusCircleIcon} from 'react-native-heroicons/outline';
-import {TodoContextProps, useTodo} from '../../context/TodoProvider';
 import {TodoFormStyle} from '../../styles';
 import {FC, memo} from 'react';
 
-const TodoForm: FC<{textTodo: string}> = ({textTodo}): JSX.Element => {
-  const {setTextTodo, addTodo} = useTodo() as TodoContextProps;
+const TodoForm: FC<{
+  onChange: (text: string) => void;
+  textTodo: string;
+  addTodoItem: () => void;
+}> = ({onChange, textTodo, addTodoItem}): JSX.Element => {
   const {
     formPanel: formPanelStyle,
     mainTitle: mainTitleStyle,
     inputForm: inputFormStyle,
-    formTodoInput: formTodoInputStyle,
     iconPlusWrapper: iconPlusWrapperStyle,
   } = TodoFormStyle;
 
@@ -20,12 +21,12 @@ const TodoForm: FC<{textTodo: string}> = ({textTodo}): JSX.Element => {
       <View style={inputFormStyle}>
         <TextInput
           value={textTodo}
-          onChangeText={text => setTextTodo(text)}
-          style={formTodoInputStyle}
-          placeholder="Create new todo..."
+          onChangeText={text => onChange(text)}
+          style={TodoFormStyle.formTodoInput}
+          placeholder={'Create new todo...'}
         />
         <View style={iconPlusWrapperStyle}>
-          <PlusCircleIcon size={36} onPress={addTodo} color={'#000'} />
+          <PlusCircleIcon size={36} onPress={addTodoItem} color={'#1c1c1c'} />
         </View>
       </View>
     </View>

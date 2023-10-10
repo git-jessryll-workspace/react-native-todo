@@ -34,14 +34,14 @@ const TodoItem: React.FC<Props> = ({item}): JSX.Element => {
           {status === 'active' && (
             <CheckCircleIcon
               size={24}
-              color={'#000'}
+              color={'#1c1c1c'}
               onPress={() => updateTodoStatus(id, 'done')}
             />
           )}
           {status === 'done' && (
             <SolidCheckCircleIcon
               size={24}
-              color={'#000'}
+              color={'#1c1c1c'}
               onPress={() => updateTodoStatus(id, 'active')}
             />
           )}
@@ -62,7 +62,7 @@ const TodoItem: React.FC<Props> = ({item}): JSX.Element => {
         </TouchableWithoutFeedback>
       </View>
       <View style={trashIconWrapperStyle}>
-        <TrashIcon color={'#000'} size={20} onPress={() => removeTodo(id)} />
+        <TrashIcon color={'#1c1c1c'} size={20} onPress={() => removeTodo(id)} />
       </View>
     </View>
   );

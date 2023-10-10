@@ -4,6 +4,7 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useCallback,
   useContext,
   useState,
 } from 'react';
@@ -13,11 +14,9 @@ import {useTodoFilter} from '../hooks/useTodoFilter';
 export type TodoContextProps = {
   todos: TodoItemType[];
   filteredTodoItems: TodoItemType[];
-  textTodo: string;
-  setTextTodo: Dispatch<SetStateAction<string>>;
   filterBy: string;
   setFilterBy: Dispatch<SetStateAction<string>>;
-  addTodo: () => void;
+  addTodo: (text: string) => void;
   removeTodo: (id: number) => void;
   updateTodoStatus: (id: number, status: string) => void;
 };
@@ -28,28 +27,29 @@ export const useTodo = () => useContext(TodoContext);
 
 const TodoProvider: FC<{children: ReactNode}> = ({children}) => {
   const [todos, setTodos] = useState<TodoItemType[]>([]);
-  const [textTodo, setTextTodo] = useState('');
   const [filterBy, setFilterBy] = useState('all');
 
-  const {filteredItems} = useTodoFilter({filterBy, todos, textTodo});
+  const {filteredItems} = useTodoFilter({filterBy, todos});
 
-  const addTodo = () => {
+  const addTodo = (text: string) => {
     setTodos((todos: TodoItemType[]) => {
       return [
         ...todos,
         {
           id: new Date().getTime(),
-          name: textTodo,
+          name: text,
           status: 'active',
         },
       ];
     });
-    setTextTodo('');
   };
 
-  const removeTodo = (id: number) => {
-    setTodos(todos => todos.filter(todo => todo.id !== id));
-  };
+  const removeTodo = useCallback(
+    (id: number) => {
+      setTodos(todos => todos.filter(todo => todo.id !== id));
+    },
+    [todos],
+  );
 
   const updateTodoStatus = (id: number, status: string) => {
     setTodos(todos =>
@@ -69,8 +69,6 @@ const TodoProvider: FC<{children: ReactNode}> = ({children}) => {
     <TodoContext.Provider
       value={{
         todos,
-        textTodo,
-        setTextTodo,
         filterBy,
         setFilterBy,
         addTodo,

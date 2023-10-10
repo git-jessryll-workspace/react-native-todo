@@ -9,6 +9,7 @@ const TodoFormStyle = StyleSheet.create({
       width: '90%',
       fontSize: 14,
       padding: 10,
+      color: '#1c1c1c'
     },
     mainTitle: {
       fontSize: 24,

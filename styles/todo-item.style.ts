@@ -32,6 +32,7 @@ const TodoItemStyle = StyleSheet.create({
   textWrapper: {
     fontSize: 16,
     textDecorationStyle: 'solid',
+    color: '#1c1c1c'
   },
   lineThrough: {
     textDecorationLine: 'line-through',
