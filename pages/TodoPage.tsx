@@ -4,10 +4,16 @@ import TodoEmptyState from '../components/Todos/TodoEmptyState';
 import {TodoContextProps, useTodo} from '../context/TodoProvider';
 import {TodoItemType} from '../types/todo';
 import {Keyboard} from 'react-native';
+import {useTodoFilter} from '../hooks/useTodoFilter';
 
 const TodoPage = (): JSX.Element => {
-  const {filteredTodoItems, filterBy, addTodo} = useTodo() as TodoContextProps;
-  const [textTodo, setTextTodo] = useState('');
+  const {filterBy, addTodo, todos} = useTodo() as TodoContextProps;
+  const [textTodo, setTextTodo] = useState<string>('');
+  const {filteredItems: filteredTodoItems} = useTodoFilter({
+    todos,
+    filterBy,
+    textTodo,
+  });
 
   const onChangeText = useCallback(
     (text: string) => {
@@ -15,7 +21,7 @@ const TodoPage = (): JSX.Element => {
     },
     [textTodo],
   );
-  
+
   const addTodoItem = useCallback(() => {
     addTodo(textTodo);
     setTextTodo('');

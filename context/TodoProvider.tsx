@@ -9,11 +9,9 @@ import {
   useState,
 } from 'react';
 import {TodoItemType} from '../types/todo';
-import {useTodoFilter} from '../hooks/useTodoFilter';
 
 export type TodoContextProps = {
   todos: TodoItemType[];
-  filteredTodoItems: TodoItemType[];
   filterBy: string;
   setFilterBy: Dispatch<SetStateAction<string>>;
   addTodo: (text: string) => void;
@@ -28,8 +26,6 @@ export const useTodo = () => useContext(TodoContext);
 const TodoProvider: FC<{children: ReactNode}> = ({children}) => {
   const [todos, setTodos] = useState<TodoItemType[]>([]);
   const [filterBy, setFilterBy] = useState('all');
-
-  const {filteredItems} = useTodoFilter({filterBy, todos});
 
   const addTodo = (text: string) => {
     setTodos((todos: TodoItemType[]) => {
@@ -74,7 +70,6 @@ const TodoProvider: FC<{children: ReactNode}> = ({children}) => {
         addTodo,
         removeTodo,
         updateTodoStatus,
-        filteredTodoItems: filteredItems,
       }}>
       {children}
     </TodoContext.Provider>
