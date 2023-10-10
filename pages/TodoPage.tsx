@@ -3,7 +3,7 @@ import {FilterTodo, TodoForm, TodoList} from '../components/Todos';
 import TodoEmptyState from '../components/Todos/TodoEmptyState';
 import {TodoContextProps, useTodo} from '../context/TodoProvider';
 import {TodoItemType} from '../types/todo';
-import {Keyboard} from 'react-native';
+import {Keyboard, View} from 'react-native';
 import {useTodoFilter} from '../hooks/useTodoFilter';
 
 const TodoPage = (): JSX.Element => {
@@ -29,7 +29,7 @@ const TodoPage = (): JSX.Element => {
   }, [textTodo]);
 
   return (
-    <>
+    <View style={{height: 'auto', backgroundColor: '#FFF'}}>
       <TodoForm
         onChange={onChangeText}
         textTodo={textTodo}
@@ -41,7 +41,7 @@ const TodoPage = (): JSX.Element => {
       ) : (
         <TodoList todos={filteredTodoItems as TodoItemType[]} />
       )}
-    </>
+    </View>
   );
 };
 export default TodoPage;

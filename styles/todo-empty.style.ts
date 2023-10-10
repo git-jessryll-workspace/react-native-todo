@@ -9,10 +9,10 @@ const TodoEmptyStyle = StyleSheet.create({
     alignContent: 'center',
   },
   emptyText: {
-    fontWeight: '600',
-    fontSize: 20,
+    fontWeight: '500',
+    fontSize: 26,
     textAlign: 'center',
-    fontFamily: 'Poppins Regular, sans-serif',
+    fontFamily: 'Poppins Bold, sans-serif',
   },
 });
 
