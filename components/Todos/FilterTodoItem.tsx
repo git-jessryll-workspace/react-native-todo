@@ -7,7 +7,9 @@ const FilterTodoItem: FC<{
   filter: {code: string; name: string};
   filterBy: string;
 }> = ({filter, filterBy}) => {
-  const {setFilterBy} = useTodo() as TodoContextProps;
+  
+    const {setFilterBy} = useTodo() as TodoContextProps;
+
   const {
     buttonWrapper: filterButtonWrapperStyle,
     activeBg: filterActiveBgStyle,
@@ -16,6 +18,7 @@ const FilterTodoItem: FC<{
     activeText: filterActiveTextStyle,
     inActiveText: filterInActiveTextStyle,
   } = TodoFilterItemStyle;
+
   return (
     <TouchableHighlight
       style={{marginRight: 8}}

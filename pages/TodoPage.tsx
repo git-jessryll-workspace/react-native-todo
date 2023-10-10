@@ -4,11 +4,11 @@ import {TodoContextProps, useTodo} from '../context/TodoProvider';
 import {TodoItemType} from '../types/todo';
 
 const TodoPage = (): JSX.Element => {
-  const {filteredTodoItems, filterBy} = useTodo() as TodoContextProps;
+  const {filteredTodoItems, filterBy, textTodo} = useTodo() as TodoContextProps;
 
   return (
     <>
-      <TodoForm />
+      <TodoForm textTodo={textTodo}/>
       <FilterTodo filterBy={filterBy} />
       {filteredTodoItems.length === 0 ? (
         <TodoEmptyState />

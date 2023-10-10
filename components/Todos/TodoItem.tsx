@@ -16,10 +16,21 @@ type Props = {
 const TodoItem: React.FC<Props> = ({item}): JSX.Element => {
   const {status, id, name} = item;
   const {removeTodo, updateTodoStatus} = useTodo() as TodoContextProps;
+
+  const {
+    todoItem: todoItemStyle,
+    todoTextWrapper: todoTextWrapperStyle,
+    checkIconWrapper: checkIconWrapperStyle,
+    textWrapper: textWrapperStyle,
+    lineThrough: lineThroughStyle,
+    noneDecoration: noneDecorationStyle,
+    trashIconWrapper: trashIconWrapperStyle,
+  } = TodoItemStyle;
+
   return (
-    <View style={TodoItemStyle.todoItem}>
-      <View style={TodoItemStyle.todoTextWrapper}>
-        <View style={TodoItemStyle.checkIconWrapper}>
+    <View style={todoItemStyle}>
+      <View style={todoTextWrapperStyle}>
+        <View style={checkIconWrapperStyle}>
           {status === 'active' && (
             <CheckCircleIcon
               size={24}
@@ -42,17 +53,15 @@ const TodoItem: React.FC<Props> = ({item}): JSX.Element => {
           <View style={{width: '90%'}}>
             <Text
               style={[
-                TodoItemStyle.textWrapper,
-                status === 'done'
-                  ? TodoItemStyle.lineThrough
-                  : TodoItemStyle.noneDecoration,
+                textWrapperStyle,
+                status === 'done' ? lineThroughStyle : noneDecorationStyle,
               ]}>
               {name}
             </Text>
           </View>
         </TouchableWithoutFeedback>
       </View>
-      <View style={TodoItemStyle.trashIconWrapper}>
+      <View style={trashIconWrapperStyle}>
         <TrashIcon color={'#000'} size={20} onPress={() => removeTodo(id)} />
       </View>
     </View>

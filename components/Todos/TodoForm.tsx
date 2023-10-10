@@ -2,21 +2,29 @@ import {Text, TextInput, View} from 'react-native';
 import {PlusCircleIcon} from 'react-native-heroicons/outline';
 import {TodoContextProps, useTodo} from '../../context/TodoProvider';
 import {TodoFormStyle} from '../../styles';
+import {FC, memo} from 'react';
 
-const TodoForm = (): JSX.Element => {
-  const {textTodo, setTextTodo, addTodo} = useTodo() as TodoContextProps;
-  
+const TodoForm: FC<{textTodo: string}> = ({textTodo}): JSX.Element => {
+  const {setTextTodo, addTodo} = useTodo() as TodoContextProps;
+  const {
+    formPanel: formPanelStyle,
+    mainTitle: mainTitleStyle,
+    inputForm: inputFormStyle,
+    formTodoInput: formTodoInputStyle,
+    iconPlusWrapper: iconPlusWrapperStyle,
+  } = TodoFormStyle;
+
   return (
-    <View style={TodoFormStyle.formPanel}>
-      <Text style={TodoFormStyle.mainTitle}>My Todos</Text>
-      <View style={TodoFormStyle.inputForm}>
+    <View style={formPanelStyle}>
+      <Text style={mainTitleStyle}>My Todos</Text>
+      <View style={inputFormStyle}>
         <TextInput
           value={textTodo}
           onChangeText={text => setTextTodo(text)}
-          style={TodoFormStyle.formTodoInput}
+          style={formTodoInputStyle}
           placeholder="Create new todo..."
         />
-        <View style={TodoFormStyle.iconPlusWrapper}>
+        <View style={iconPlusWrapperStyle}>
           <PlusCircleIcon size={36} onPress={addTodo} color={'#000'} />
         </View>
       </View>
@@ -24,4 +32,4 @@ const TodoForm = (): JSX.Element => {
   );
 };
 
-export default TodoForm;
+export default memo(TodoForm);
