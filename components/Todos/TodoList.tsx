@@ -1,15 +1,8 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList} from 'react-native';
 import TodoItem from './TodoItem';
 import {TodoContextProps, useTodo} from '../../context/TodoProvider';
-
-const styles = StyleSheet.create({
-  containerTodoList: {
-    backgroundColor: '#FFF',
-    paddingHorizontal: 10,
-    paddingBottom: 20,
-  },
-});
+import {TodoListStyle} from '../../styles';
 
 type Props = {
   todos: {
@@ -19,11 +12,11 @@ type Props = {
   }[];
 };
 
-const TodoListComponent: React.FC<Props> = ({todos}):JSX.Element => {
+const TodoListComponent: React.FC<Props> = ({todos}): JSX.Element => {
   const {removeTodo, updateTodoStatus} = useTodo() as TodoContextProps;
   return (
     <FlatList
-      style={styles.containerTodoList}
+      style={TodoListStyle.containerTodoList}
       data={todos}
       renderItem={({item}) => (
         <TodoItem

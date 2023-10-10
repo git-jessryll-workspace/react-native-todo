@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableWithoutFeedback} from 'react-native';
+import {View, Text, TouchableWithoutFeedback} from 'react-native';
 import {CheckCircleIcon, TrashIcon} from 'react-native-heroicons/outline';
 import {CheckCircleIcon as SolidCheckCircleIcon} from 'react-native-heroicons/solid';
+import {TodoItemStyle} from '../../styles';
 
 type Props = {
   id: number;
@@ -11,18 +12,6 @@ type Props = {
   updateTodoStatus: (id: number, status: string) => void;
 };
 
-const styles = StyleSheet.create({
-  todoItem: {
-    padding: 8,
-    borderWidth: 1,
-    marginVertical: 3,
-    borderRadius: 5,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-});
-
 const TodoItem: React.FC<Props> = ({
   name,
   id,
@@ -31,22 +20,9 @@ const TodoItem: React.FC<Props> = ({
   updateTodoStatus,
 }): JSX.Element => {
   return (
-    <View style={styles.todoItem}>
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          width: '90%',
-          flexWrap: 'wrap',
-        }}>
-        <View
-          style={{
-            width: '10%',
-            display: 'flex',
-            alignItems: 'center',
-            paddingRight: 5,
-          }}>
+    <View style={TodoItemStyle.todoItem}>
+      <View style={TodoItemStyle.todoTextWrapper}>
+        <View style={TodoItemStyle.checkIconWrapper}>
           {status === 'active' && (
             <CheckCircleIcon
               size={24}
@@ -68,23 +44,18 @@ const TodoItem: React.FC<Props> = ({
           }>
           <View style={{width: '90%'}}>
             <Text
-              style={{
-                fontSize: 16,
-                textDecorationLine: status === 'done' ? 'line-through' : 'none',
-                textDecorationStyle: 'solid',
-              }}>
+              style={[
+                TodoItemStyle.textWrapper,
+                status === 'done'
+                  ? TodoItemStyle.lineThrough
+                  : TodoItemStyle.noneDecoration,
+              ]}>
               {name}
             </Text>
           </View>
         </TouchableWithoutFeedback>
       </View>
-      <View
-        style={{
-          width: '10%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={TodoItemStyle.trashIconWrapper}>
         <TrashIcon color={'#000'} size={20} onPress={() => removeTodo(id)} />
       </View>
     </View>

@@ -1,24 +1,12 @@
-import { StyleSheet, Text, View } from "react-native"
-
-const styles = StyleSheet.create({
-    emptyPanel: {
-        display: 'flex',
-        height: 300,
-        backgroundColor: '#FFF',
-        justifyContent: 'center',
-        alignContent: 'center',
-    }
-})
+import {Text, View} from 'react-native';
+import {TodoEmptyStyle} from '../../styles';
 
 const TodoEmptyState = () => {
-    return <View style={styles.emptyPanel}>
-        <Text style={{ 
-            fontWeight: '600',
-            fontSize: 20,
-            textAlign: 'center',
-            fontFamily: 'Poppins Regular'
-         }}>No todo found</Text>
+  return (
+    <View style={TodoEmptyStyle.emptyPanel}>
+      <Text style={TodoEmptyStyle.emptyText}>No todo found</Text>
     </View>
-}
+  );
+};
 
 export default TodoEmptyState;
